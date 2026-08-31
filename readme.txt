@@ -37,6 +37,13 @@ Why CoreSlim stands apart:
 
 CoreSlim uses the standard WordPress update mechanism. When you install it from the WordPress.org directory, updates are delivered automatically through the normal WordPress.org channel. Installations from other sources (such as GitHub or the ShareWire site) receive updates through ShareWire.in using the native updater. Free forever.
 
+== Installation ==
+
+1. In WordPress, go to Plugins > Add New and search for CoreSlim, or upload the zip and activate it.
+2. Go to Settings > CoreSlim to open the switchboard.
+3. Pick a preset (Safe Defaults, Maximum Performance, or Reset All) or enable the individual toggles you want.
+4. Save. All changes apply immediately, and nothing is enabled by default until you choose to turn it on.
+
 == Frequently Asked Questions ==
 
 = Will this break my site? =
@@ -68,3 +75,7 @@ CoreSlim stores all settings locally in your WordPress database only. It will no
 * Safe, Max, and Reset presets.
 * JSON settings export and import.
 * ShareWire automatic updates and anonymous telemetry.
+
+== Screenshots ==
+
+1. The CoreSlim switchboard under Settings > CoreSlim, where you enable each optimization with a single toggle and choose from presets.
