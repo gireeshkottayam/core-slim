@@ -3,7 +3,8 @@
  * CoreSlim Updater: ShareWire native WordPress auto-updater + telemetry.
  * Free product, non-blocking. No license key, no activation lock.
  * Queries api/update.php with only the product slug and current version.
- * Anonymous telemetry pings api/telemetry.php once per load (best effort).
+ * Anonymous telemetry pings api/telemetry.php, but ONLY when the user has
+ * explicitly opted in (Settings > Privacy & Consent, off by default).
  */
 
 if (!defined('ABSPATH')) {

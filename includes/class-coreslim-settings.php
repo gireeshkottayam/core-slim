@@ -36,6 +36,8 @@ final class CoreSlim_Settings
         'heartbeat_editor_freq'  => 15,
         'max_revisions'          => -1,
         'autosave_interval'      => 60,
+        // Privacy / consent
+        'enable_telemetry'       => false,
     );
 
     private static $presets = array(
@@ -112,6 +114,7 @@ final class CoreSlim_Settings
             'remove_shortlinks', 'remove_rest_links', 'remove_feed_links',
             'disable_self_pingbacks', 'disable_xmlrpc', 'block_author_enum',
             'disable_app_passwords', 'heartbeat_frontend',
+            'enable_telemetry',
         );
         foreach ($bools as $k) {
             $clean[$k] = !empty($input[$k]);

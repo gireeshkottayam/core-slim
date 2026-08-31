@@ -223,6 +223,13 @@ final class CoreSlim_Admin
                     'autosave_interval'     => array(60 => '60 (default)', 120 => '120', 180 => '180', 300 => '300'),
                 ),
             ),
+            'privacy' => array(
+                'title' => 'Privacy & Consent',
+                'desc'  => 'CoreSlim stores all settings locally and never contacts an external server unless you enable it here.',
+                'fields' => array(
+                    'enable_telemetry' => 'Send anonymous usage telemetry to ShareWire.in (off by default)',
+                ),
+            ),
         );
     }
 }

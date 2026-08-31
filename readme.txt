@@ -3,7 +3,7 @@ Contributors: sharewire
 Tags: performance, optimization, speed, bloat, cleanup, xmlrpc, emoji, heartbeat
 Requires at least: 5.8
 Tested up to: 6.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -53,9 +53,12 @@ No. CoreSlim is free open source software. All optimizations and updates work wi
 
 = How is my data handled? =
 
-CoreSlim sends anonymous telemetry (WordPress version, PHP version, plugin version, site domain) to ShareWire.in to power platform analytics. No personal data, passwords, or content is ever collected.
+CoreSlim stores all settings locally in your WordPress database only. It will not contact any external server unless you opt in under Settings > CoreSlim > Privacy & Consent. Telemetry (WordPress version, PHP version, plugin version, site domain) is sent to ShareWire.in ONLY when you enable "Send anonymous usage telemetry to ShareWire.in". No personal data, passwords, or content is ever collected. CoreSlim similarly never sends an update request outside of the WordPress update screen unless you have automatic updates enabled.
 
 == Changelog ==
+
+= 1.0.1 =
+* Telemetry is now opt-in (off by default) under Settings > Privacy & Consent, brought forward to meet WordPress.org guideline #7 (no user tracking without explicit consent).
 
 = 1.0.0 =
 * Initial public release. Asset, header, security, and performance modules.

@@ -3,7 +3,7 @@
  * Plugin Name:       CoreSlim (Zero Bloat WordPress Core Optimizer)
  * Plugin URI:        https://sharewire.in/product.php?product=core-slim
  * Description:       Lightweight, zero-bloat WordPress plugin to disable unnecessary core features: emojis, XML-RPC, embeds, Dashicons, version disclosure, Heartbeat API, post revisions, and autosave overhead. Single autoloaded option, zero external dependencies, under 0.2ms execution. Free and open source with automatic updates powered by ShareWire.in.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            ShareWire.in
@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('CORE_SLIM_VERSION', '1.0.0');
+define('CORE_SLIM_VERSION', '1.0.1');
 define('CORE_SLIM_BASE', defined('SW_LICENSE_BASE') ? rtrim((string) SW_LICENSE_BASE, '/') : 'https://sharewire.in');
 define('CORE_SLIM_SLUG', 'core-slim');
 define('CORE_SLIM_BASENAME', plugin_basename(__FILE__));
@@ -44,4 +44,8 @@ add_action('admin_menu', array('CoreSlim_Admin', 'menu'));
 add_action('admin_enqueue_scripts', array('CoreSlim_Admin', 'enqueue'));
 add_action('admin_init', array('CoreSlim_Admin', 'register_ajax'));
 CoreSlim_Updater::init();
-add_action('plugins_loaded', array('CoreSlim_Updater', 'telemetry'), 20);
+
+// Telemetry is opt-in (Settings > Privacy & Consent) and off by default.
+if (CoreSlim_Settings::get('enable_telemetry')) {
+    add_action('plugins_loaded', array('CoreSlim_Updater', 'telemetry'), 20);
+}

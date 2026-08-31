@@ -66,7 +66,7 @@ CoreSlim checks for updates through the ShareWire platform and installs them aut
 
 ## Telemetry
 
-CoreSlim sends anonymous telemetry (WordPress version, PHP version, plugin version, site domain) to ShareWire.in to power platform analytics. No personal data is collected, and the telemetry call is non-blocking and best-effort.
+CoreSlim stores all settings locally in your WordPress database. It will not contact any external server unless you opt in under Settings > CoreSlim > Privacy & Consent. Anonymous telemetry (WordPress version, PHP version, plugin version, site domain) is sent to ShareWire.in ONLY when you enable "Send anonymous usage telemetry to ShareWire.in" (off by default). No personal data is collected, and the telemetry call is non-blocking and best-effort.
 
 ## Frequently Asked Questions
 
@@ -83,6 +83,9 @@ All toggles are opt-in and reversible. If a builder depends on a disabled asset,
 No. CoreSlim is free open source software, available under the GPL-2.0-or-later license.
 
 ## Changelog
+
+### 1.0.1
+- Telemetry is now opt-in (off by default) under Settings > Privacy & Consent, meeting WordPress.org guideline #7 (no user tracking without explicit consent).
 
 ### 1.0.0
 - Initial public release.

@@ -29,6 +29,8 @@ check(isset($d['disable_emojis'], $d['disable_xmlrpc'], $d['heartbeat_admin_freq
 check($d['disable_emojis'] === false, 'Defaults start all toggles off');
 check($d['max_revisions'] === -1, 'Default max revisions is -1 (WordPress default)');
 check($d['autosave_interval'] === 60, 'Default autosave interval is 60');
+check(isset($d['enable_telemetry']), 'Telemetry consent key present in defaults');
+check($d['enable_telemetry'] === false, 'Telemetry is opt-in and OFF by default');
 
 $all = CoreSlim_Settings::getAll();
 check(count($all) === count($d), 'getAll returns a full merged array');
@@ -42,6 +44,7 @@ $clean = CoreSlim_Settings::sanitize(array(
     'autosave_interval' => '180',
     'heartbeat_admin_freq' => '60',
     'heartbeat_editor_freq' => '120',
+    'enable_telemetry' => '1',
     'unknown_fake' => 'should drop',
 ));
 check($clean['disable_emojis'] === true, 'Sanitize turns string "1" into bool true');
@@ -50,6 +53,7 @@ check($clean['disable_dashicons'] === false, 'Sanitize turns empty into false');
 check($clean['max_revisions'] === 5, 'Sanitize maps valid revisions value');
 check($clean['autosave_interval'] === 180, 'Sanitize maps valid autosave value');
 check($clean['heartbeat_admin_freq'] === 60, 'Sanitize keeps valid heartbeat freq');
+check($clean['enable_telemetry'] === true, 'Sanitize allows telemetry to be opted in');
 check(!isset($clean['unknown_fake']), 'Sanitize drops unknown keys');
 check(!isset($clean['unknown_fake']), 'Sanitize whitelists keys only');
 $bad = CoreSlim_Settings::sanitize(array('max_revisions' => '999'));
@@ -178,6 +182,39 @@ $allDefaults = array_keys(CoreSlim_Settings::defaults());
 foreach ($allDefaults as $k) {
     check(in_array($k, $fieldKeys, true), "Settings key $k present in admin UI");
 }
+
+/* ---------- 12. Telemetry is consent-gated (wordpress.org guideline #7) ---------- */
+$telemetryRegistered = false;
+foreach (($GLOBALS['__calls'] ?? array()) as $call) {
+    if (($call['type'] ?? '') === 'action'
+        && ($call['hook'] ?? '') === 'plugins_loaded'
+        && is_array($call['cb'])
+        && ($call['cb'][0] ?? '') === 'CoreSlim_Updater'
+        && ($call['cb'][1] ?? '') === 'telemetry') {
+        $telemetryRegistered = true;
+    }
+}
+check($telemetryRegistered === false, 'Telemetry action NOT registered when consent is off (default)');
+
+$telemetryConsent = CoreSlim_Settings::sanitize(array('enable_telemetry' => '1'));
+check($telemetryConsent['enable_telemetry'] === true, 'Telemetry can be enabled via sanitize consent');
+
+/* ---------- 13. Rule 36 / 21 dash compliance (docs) ---------- */
+$workspaceDocs = dirname(dirname(__DIR__)) . '/docs';
+$docs = array(
+    $workspaceDocs . '/CORESLIM-WPORG.md',
+    $workspaceDocs . '/RISEPILOT-LIVE-SALE.md',
+);
+$dashFoundDocs = false;
+foreach ($docs as $doc) {
+    if (!is_file($doc)) {
+        continue;
+    }
+    if (preg_match('/[\x{2014}\x{2013}]/u', (string) file_get_contents($doc))) {
+        $dashFoundDocs = true;
+    }
+}
+check(!$dashFoundDocs, 'Rule 36: no em or en dash in new planning docs');
 
 echo "\n----\n";
 echo "Passed: $pass  Failed: $fail\n";
