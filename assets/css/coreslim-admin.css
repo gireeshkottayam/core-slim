@@ -16,6 +16,15 @@
 
 .coreslim-subtitle { color: #667085; font-size: 14px; margin-top: 4px; }
 
+.coreslim-wporg-note {
+    background: #f0f6fc;
+    border: 1px solid #c5d9ed;
+    color: #1d4570;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
 .coreslim-presets {
     display: flex;
     gap: 8px;

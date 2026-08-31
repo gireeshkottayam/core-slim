@@ -23,7 +23,23 @@ if (!defined('ABSPATH')) {
 }
 
 define('CORE_SLIM_VERSION', '1.0.1');
-define('CORE_SLIM_BASE', defined('SW_LICENSE_BASE') ? rtrim((string) SW_LICENSE_BASE, '/') : 'https://sharewire.in');
+
+// wordpress.org-managed build: set to 1 by build.ps1 -WpOrg. In that build the
+// ShareWire update channel is disabled so updates flow from WordPress.org only
+// (guideline #8). The GitHub/ShareWire build leaves it 0 and keeps ShareWire
+// auto-updates for sites that install it from GitHub or sharewire.in.
+if (!defined('CORE_SLIM_WPORG')) {
+    define('CORE_SLIM_WPORG', 0);
+}
+
+// ShareWire server base. Left empty on the wordpress.org build so no external
+// host string ships in that distribution (the updater/telemetry that use it are
+// not bundled there either).
+if (CORE_SLIM_WPORG) {
+    define('CORE_SLIM_BASE', '');
+} else {
+    define('CORE_SLIM_BASE', defined('SW_LICENSE_BASE') ? rtrim((string) SW_LICENSE_BASE, '/') : 'https://sharewire.in');
+}
 define('CORE_SLIM_SLUG', 'core-slim');
 define('CORE_SLIM_BASENAME', plugin_basename(__FILE__));
 define('CORE_SLIM_DIR', plugin_dir_path(__FILE__));
@@ -37,15 +53,22 @@ require_once CORE_SLIM_DIR . 'includes/class-coreslim-cleaner.php';
 require_once CORE_SLIM_DIR . 'includes/class-coreslim-security.php';
 require_once CORE_SLIM_DIR . 'includes/class-coreslim-perf.php';
 require_once CORE_SLIM_DIR . 'includes/class-coreslim-admin.php';
-require_once CORE_SLIM_DIR . 'includes/class-coreslim-updater.php';
 
 add_action('plugins_loaded', array('CoreSlim_Core', 'boot'), 5);
 add_action('admin_menu', array('CoreSlim_Admin', 'menu'));
 add_action('admin_enqueue_scripts', array('CoreSlim_Admin', 'enqueue'));
 add_action('admin_init', array('CoreSlim_Admin', 'register_ajax'));
-CoreSlim_Updater::init();
 
-// Telemetry is opt-in (Settings > Privacy & Consent) and off by default.
-if (CoreSlim_Settings::get('enable_telemetry')) {
-    add_action('plugins_loaded', array('CoreSlim_Updater', 'telemetry'), 20);
+// The ShareWire updater class (auto-update via /api/update.php + telemetry) is
+// loaded ONLY on the GitHub/ShareWire build. On the wordpress.org build the class
+// is not shipped at all so the plugin has zero external server calls and updates
+// flow purely through the native WordPress.org channel (guideline #8).
+if (!CORE_SLIM_WPORG) {
+    require_once CORE_SLIM_DIR . 'includes/class-coreslim-updater.php';
+    CoreSlim_Updater::init();
+
+    // Telemetry is opt-in (Settings > Privacy & Consent) and off by default.
+    if (CoreSlim_Settings::get('enable_telemetry')) {
+        add_action('plugins_loaded', array('CoreSlim_Updater', 'telemetry'), 20);
+    }
 }

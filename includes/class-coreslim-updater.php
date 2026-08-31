@@ -17,6 +17,11 @@ final class CoreSlim_Updater
 
     public static function init(): void
     {
+        // On the wordpress.org build, never register the ShareWire update channel
+        // (guideline #8). This is a defensive guard; core-slim.php already skips it.
+        if (defined('CORE_SLIM_WPORG') && CORE_SLIM_WPORG) {
+            return;
+        }
         add_filter('pre_set_site_transient_update_plugins', array(__CLASS__, 'check'));
         add_filter('plugins_api', array(__CLASS__, 'info'), 10, 3);
     }

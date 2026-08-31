@@ -1,8 +1,10 @@
 # build.ps1 - produce an installable WordPress plugin .zip for CoreSlim.
-# Usage:  powershell -File build.ps1 [version]   (defaults to 1.0.0)
-# Output: build/core-slim-<version>.zip containing a top-level
-#         core-slim/ folder (for Upload in Plugins > Add New).
-param([string]$Version = "")
+# Usage:  powershell -File build.ps1 [version] [-WpOrg]
+#   -WpOrg  emit the wordpress.org-compliant variant (native wp.org updates only,
+#           ShareWire update channel disabled, telemetry still opt-in). Output is
+#           build/core-slim-<version>-wporg.zip for the SVN trunk / tags.
+#   default emits build/core-slim-<version>.zip for the GitHub/ShareWire channel.
+param([string]$Version = "", [switch]$WpOrg)
 
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $version = if ($Version -eq "") { "1.0.0" } else { $Version }
@@ -25,7 +27,8 @@ if ($dashes) {
     exit 1
 }
 
-$zip = Join-Path $build "core-slim-$version.zip"
+$suffix = if ($WpOrg) { "-wporg" } else { "" }
+$zip = Join-Path $build "core-slim-$version$suffix.zip"
 if (Test-Path $zip) { Remove-Item $zip }
 
 Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -37,6 +40,20 @@ foreach ($item in @("core-slim.php", "includes", "assets", "readme.txt", "LICENS
     if (Test-Path $src) {
         Copy-Item $src (Join-Path $tmp "core-slim") -Recurse -Force
     }
+}
+
+if ($WpOrg) {
+    # The wordpress.org build ships NO ShareWire integration at all: drop the
+    # updater class (auto-update endpoint + telemetry) so the plugin has zero
+    # external server references and uses native wp.org updates only (guideline
+    # #8, #7). Keep the setting toggle code so existing config stays valid.
+    $updater = Join-Path $tmp "core-slim\includes\class-coreslim-updater.php"
+    if (Test-Path $updater) { Remove-Item $updater }
+
+    # Rewrite the variant constant in the staged copy so the ShareWire update
+    # channel is compiled out of the wordpress.org build (guideline #8).
+    $bootstrap = Join-Path $tmp "core-slim\core-slim.php"
+    (Get-Content $bootstrap) -replace "define\('CORE_SLIM_WPORG', 0\);", "define('CORE_SLIM_WPORG', 1);" -replace ": 'https://sharewire\.in'\);", ": '');" | Set-Content $bootstrap
 }
 
 [System.IO.Compression.ZipFile]::CreateFromDirectory($tmp, $zip)
