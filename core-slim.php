@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       CoreSlim (Zero Bloat WordPress Core Optimizer)
  * Plugin URI:        https://sharewire.in/product.php?product=core-slim
- * Description:       Lightweight, zero-bloat WordPress plugin to disable unnecessary core features: emojis, XML-RPC, embeds, Dashicons, version disclosure, Heartbeat API, post revisions, and autosave overhead. Single autoloaded option, zero external dependencies, under 0.2ms execution. Free and open source with automatic updates powered by ShareWire.in.
- * Version:           1.0.1
+ * Description:       Lightweight, zero-bloat WordPress plugin to disable unnecessary core features: emojis, XML-RPC, embeds, Dashicons, version disclosure, Heartbeat API, post revisions, and autosave overhead. Single autoloaded option, zero external dependencies, under 0.2ms execution. Free and open source with automatic updates through the standard WordPress updater.
+ * Version:           1.0.2
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            ShareWire.in
@@ -13,16 +13,17 @@
  * Text Domain:       core-slim
  *
  * CoreSlim is a free, open source product of ShareWire.in.
- * No licensing core is embedded. Telemetry and auto-update delivery
- * use the ShareWire platform (https://sharewire.in) over HTTPS.
- * All optimizations run locally on your own server.
+ * All optimizations run locally on your own server. Updates use the standard
+ * WordPress update channel; optional anonymous telemetry (opt-in, off by
+ * default) is sent to the ShareWire platform (https://sharewire.in) only when
+ * the user enables it under Settings > CoreSlim > Privacy & Consent.
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-define('CORE_SLIM_VERSION', '1.0.1');
+define('CORE_SLIM_VERSION', '1.0.2');
 
 // wordpress.org-managed build: set to 1 by build.ps1 -WpOrg. In that build the
 // ShareWire update channel is disabled so updates flow from WordPress.org only

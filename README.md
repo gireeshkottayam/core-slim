@@ -62,7 +62,7 @@ CoreSlim gives you a clean switchboard to selectively disable unnecessary WordPr
 
 ## Automatic Updates
 
-CoreSlim checks for updates through the ShareWire platform and installs them automatically through the native WordPress updater. No license key required.
+CoreSlim uses the standard WordPress update mechanism. Installations from the WordPress.org directory receive updates through the normal WordPress.org channel. Installations from other sources (such as GitHub or the ShareWire site) receive updates through ShareWire.in using the native updater. No license key required.
 
 ## Telemetry
 
@@ -84,6 +84,9 @@ No. CoreSlim is free open source software, available under the GPL-2.0-or-later 
 
 ## Changelog
 
+### 1.0.2
+- WordPress.org build now uses native WordPress.org updates only (no external update server); GitHub/ShareWire installs keep ShareWire auto-updates. Tested up to WordPress 7.0.
+
 ### 1.0.1
 - Telemetry is now opt-in (off by default) under Settings > Privacy & Consent, meeting WordPress.org guideline #7 (no user tracking without explicit consent).
 
@@ -92,7 +95,7 @@ No. CoreSlim is free open source software, available under the GPL-2.0-or-later 
 - Asset, header, security, and performance modules.
 - Safe, Max, and Reset presets.
 - JSON settings export and import.
-- ShareWire automatic updates and anonymous telemetry.
+- ShareWire automatic updates and anonymous telemetry (opt-in since 1.0.1).
 
 ## License
 
@@ -100,4 +103,4 @@ GPL-2.0-or-later. See [LICENSE](LICENSE).
 
 ---
 
-CoreSlim is a free product of [ShareWire.in](https://sharewire.in). Automatic updates and analytics are powered by the ShareWire platform.
+CoreSlim is a free product of [ShareWire.in](https://sharewire.in). Optional telemetry (off by default) is powered by the ShareWire platform.

@@ -1,2 +1,4 @@
 build/
 *.zip
+svn-staging/
+svn-assets/

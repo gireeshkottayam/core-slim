@@ -2,8 +2,8 @@
 Contributors: sharewire
 Tags: performance, optimization, speed, bloat, cleanup, xmlrpc, emoji, heartbeat
 Requires at least: 5.8
-Tested up to: 6.4
-Stable tag: 1.0.1
+Tested up to: 7.0
+Stable tag: 1.0.2
 Requires PHP: 7.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -35,7 +35,7 @@ Why CoreSlim stands apart:
 
 = Automatic updates =
 
-CoreSlim checks for updates through ShareWire.in on every update screen load and installs them automatically through the native WordPress updater. Free forever.
+CoreSlim uses the standard WordPress update mechanism. When you install it from the WordPress.org directory, updates are delivered automatically through the normal WordPress.org channel. Installations from other sources (such as GitHub or the ShareWire site) receive updates through ShareWire.in using the native updater. Free forever.
 
 == Frequently Asked Questions ==
 
@@ -56,6 +56,9 @@ No. CoreSlim is free open source software. All optimizations and updates work wi
 CoreSlim stores all settings locally in your WordPress database only. It will not contact any external server unless you opt in under Settings > CoreSlim > Privacy & Consent. Telemetry (WordPress version, PHP version, plugin version, site domain) is sent to ShareWire.in ONLY when you enable "Send anonymous usage telemetry to ShareWire.in". No personal data, passwords, or content is ever collected. CoreSlim similarly never sends an update request outside of the WordPress update screen unless you have automatic updates enabled.
 
 == Changelog ==
+
+= 1.0.2 =
+* WordPress.org build now uses native WordPress.org updates only (no external update server), while GitHub/ShareWire installs keep ShareWire auto-updates. Tested up to WordPress 7.0.
 
 = 1.0.1 =
 * Telemetry is now opt-in (off by default) under Settings > Privacy & Consent, brought forward to meet WordPress.org guideline #7 (no user tracking without explicit consent).
