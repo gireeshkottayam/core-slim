@@ -1,0 +1,99 @@
+/* CoreSlim Admin Styles - clean, modern settings switchboard */
+
+.coreslim-wrap { max-width: 860px; }
+
+.coreslim-badge {
+    display: inline-block;
+    background: #00d084;
+    color: #03230f;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 2px 10px;
+    border-radius: 20px;
+    vertical-align: middle;
+}
+
+.coreslim-subtitle { color: #667085; font-size: 14px; margin-top: 4px; }
+
+.coreslim-presets {
+    display: flex;
+    gap: 8px;
+    margin: 16px 0 8px;
+}
+
+.coreslim-preset-btn { margin: 0 !important; }
+
+.coreslim-section {
+    background: #fff;
+    border: 1px solid #e4e7ec;
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-top: 14px;
+}
+
+.coreslim-section-title { font-size: 15px; margin: 0 0 4px; color: #101828; }
+.coreslim-section-desc { color: #667085; font-size: 13px; margin: 0 0 14px; }
+
+.coreslim-row {
+    padding: 10px 0;
+    border-bottom: 1px solid #f2f4f7;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+.coreslim-row:last-child { border-bottom: none; }
+
+.coreslim-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    flex: 1;
+}
+.coreslim-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+.coreslim-switch {
+    position: relative;
+    width: 40px;
+    height: 22px;
+    background: #d0d5dd;
+    border-radius: 22px;
+    transition: background 0.2s;
+    flex: 0 0 auto;
+}
+.coreslim-switch::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 2px;
+    top: 2px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+.coreslim-toggle input:checked + .coreslim-switch { background: #0675e9; }
+.coreslim-toggle input:checked + .coreslim-switch::before { transform: translateX(18px); }
+
+.coreslim-label { color: #344054; font-size: 13px; }
+
+.coreslim-row select {
+    min-width: 200px;
+    border: 1px solid #d0d5dd;
+    border-radius: 6px;
+    padding: 6px 8px;
+}
+
+.coreslim-transfer { margin-top: 16px; }
+
+.coreslim-feedback {
+    padding: 8px 12px;
+    border-radius: 6px;
+    display: none;
+    margin: 8px 0 0;
+}
+.coreslim-feedback.ok { display: block; background: #ecfdf3; color: #027a48; }
+.coreslim-feedback.err { display: block; background: #fef3f2; color: #b42318; }
