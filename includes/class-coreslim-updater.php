@@ -116,7 +116,7 @@ final class CoreSlim_Updater
             return $res;
         }
         return (object) array(
-            'name'         => 'CoreSlim (Zero Bloat WordPress Core Optimizer)',
+            'name'         => 'CoreSlim (Zero Bloat Core Optimizer)',
             'slug'         => CORE_SLIM_SLUG,
             'version'      => CORE_SLIM_VERSION,
             'author'       => 'ShareWire.in',

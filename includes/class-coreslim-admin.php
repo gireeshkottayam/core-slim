@@ -107,7 +107,7 @@ final class CoreSlim_Admin
         ?>
         <div class="wrap coreslim-wrap">
             <h1>CoreSlim <span class="coreslim-badge">FREE</span></h1>
-            <p class="coreslim-subtitle">Zero Bloat WordPress Core Optimizer. Disable unnecessary core features with zero overhead.</p>
+            <p class="coreslim-subtitle">Zero Bloat Core Optimizer. Disable unnecessary core features with zero overhead.</p>
 
             <?php if (defined('CORE_SLIM_WPORG') && CORE_SLIM_WPORG) : ?>
             <p class="coreslim-wporg-note">This copy was installed from the WordPress.org directory, so updates are delivered through the normal WordPress.org update channel.</p>

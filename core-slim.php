@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       CoreSlim (Zero Bloat WordPress Core Optimizer)
+ * Plugin Name:       CoreSlim (Zero Bloat Core Optimizer)
  * Plugin URI:        https://sharewire.in/product.php?product=core-slim
  * Description:       Lightweight, zero-bloat WordPress plugin to disable unnecessary core features: emojis, XML-RPC, embeds, Dashicons, version disclosure, Heartbeat API, post revisions, and autosave overhead. Single autoloaded option, zero external dependencies, under 0.2ms execution. Free and open source with automatic updates through the standard WordPress updater.
  * Version:           1.0.2

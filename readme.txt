@@ -1,4 +1,4 @@
-=== CoreSlim (Zero Bloat WordPress Core Optimizer) ===
+=== CoreSlim (Zero Bloat Core Optimizer) ===
 Contributors: sharewire
 Tags: performance, optimization, speed, bloat, cleanup, xmlrpc, emoji, heartbeat
 Requires at least: 5.8

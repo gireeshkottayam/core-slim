@@ -1,4 +1,4 @@
-# CoreSlim (Zero Bloat WordPress Core Optimizer)
+# CoreSlim (Zero Bloat Core Optimizer)
 
 Lightweight, open source WordPress plugin to disable unnecessary core features with zero overhead. Free forever.
 
